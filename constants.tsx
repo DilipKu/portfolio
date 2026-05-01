@@ -67,7 +67,7 @@ export const PROJECTS: Project[] = [
 export const EXPERIENCES: Experience[] = [
   {
     id: "exp1",
-    role: "Scrum Master",
+    role: "Tech Lead (Scrum Master)",
     company: "Bits & Bytes Soft Pvt. Ltd, Gurugram",
     period: "Sep 2023 - Jun 2025",
     description: "Led delivery of AI/ML-powered telematics solutions for connected vehicles, coordinating mobile, backend, and cloud teams.",
@@ -91,7 +91,7 @@ export const EXPERIENCES: Experience[] = [
   },
   {
     id: "exp3",
-    role: "Technical Program Manager",
+    role: "Technical Project Manager",
     company: "Oodles Technologies Pvt. Ltd, Gurugram",
     period: "Apr 2021 - Aug 2022",
     description: "Managed enterprise Android product delivery and CI/CD pipelines for large-scale mobile applications.",
