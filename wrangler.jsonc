@@ -1,8 +1,0 @@
-{
-// wrangler.jsonc
-"name": "myportfolio",
-"compatibility_date": "2026-02-01",
-"assets": {
-    "directory": "./dist"
-  }
-}
