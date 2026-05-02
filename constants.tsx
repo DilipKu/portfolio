@@ -79,6 +79,28 @@ export const PROJECTS: Project[] = [
     image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop",
     github: "#",
     link: "#"
+  },
+  {
+    id: "p3",
+    title: "AI Sales Intelligence Pipeline",
+    description: "An end-to-end AI pipeline that automates the analysis of sales conversations, extracting key intent signals and classifying leads in real-time.",
+    tech: ["Python", "Machine Learning", "NLP", "Cloud Infrastructure", "Real-time Processing"],
+    challenges: "High volumes of call recordings relied on manual review for lead qualification, leading to delayed decisions, inconsistent evaluations, high operational costs, and missed high-intent leads.",
+    solutions: "Engineered an automated AI/ML pipeline that processes conversational data to extract intent signals and classify leads instantly, significantly reducing operational costs and accelerating decision-making.",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
+    github: "#",
+    link: "#"
+  },
+  {
+    id: "p4",
+    title: "Centralized Fleet Control Platform",
+    description: "Designed and implemented a centralized fleet control platform enabling remote vehicle immobilization, real-time tracking, FOTA updates, and automated workflows.",
+    tech: ["IoT", "Telematics", "Cloud Architecture", "FOTA", "AI Alerts"],
+    challenges: "Fleet operators faced operational inefficiency, revenue leakage, and delayed decision-making due to delayed theft response, manual tracking, inefficient FOTA updates, and poor fleet visibility.",
+    solutions: "Built a comprehensive control platform featuring real-time fleet tracking, remote vehicle immobilization, seamless FOTA updates, AI-driven theft alerts, and automated dues recovery workflows.",
+    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop",
+    github: "#",
+    link: "#"
   }
 ];
 
