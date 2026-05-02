@@ -598,9 +598,10 @@ const Footer = () => (
          <div>
            <h4 className="text-white font-black mb-8 text-xs uppercase tracking-[0.3em]">Technical</h4>
            <ul className="space-y-5 text-slate-500 font-bold text-sm uppercase tracking-widest">
-             <li>React Native</li>
-             <li>Kotlin / Swift</li>
-             <li>OCPP 1.6J</li>
+             <li>Kotlin / Compose</li>
+             <li>MVVM / Clean Arch</li>
+             <li>IoT / Telematics</li>
+             <li>CI/CD & Testing</li>
            </ul>
          </div>
          <div className="col-span-2">

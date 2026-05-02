@@ -3,7 +3,7 @@ import { Project, Experience, SkillGroup, BlogPost } from './types';
 
 export const SOCIAL_LINKS = {
   linkedin: "https://www.linkedin.com/in/dilipkrgupta/",
-  github: "https://github.com/dilipkrgupta",
+  github: "https://github.com/DilipKu",
   email: "maildilip45@gmail.com",
   phone: "+91-9910624074",
   location: "New Delhi, India"
@@ -20,12 +20,30 @@ export const SKILL_GROUPS: SkillGroup[] = [
     ]
   },
   {
+    category: "Core Android Development",
+    skills: [
+      { name: "Kotlin, Java & KMP", icon: "💻" },
+      { name: "Jetpack Compose & UI", icon: "🎨" },
+      { name: "Coroutines, Flow & WorkManager", icon: "⚡" },
+      { name: "MVVM, MVI & Dagger Hilt", icon: "🏗️" }
+    ]
+  },
+  {
     category: "Platform Engineering",
     skills: [
-      { name: "Android (Kotlin / Jetpack Compose)", icon: "🤖" },
       { name: "IoT / BLE / MQTT / FOTA", icon: "🌐" },
       { name: "Clean / Modular Architecture", icon: "🏗️" },
-      { name: "CI/CD & Automation", icon: "🚀" }
+      { name: "Git, Jenkins & CI/CD Pipelines", icon: "🚀" },
+      { name: "Android Studio & Proguard", icon: "🛠️" }
+    ]
+  },
+  {
+    category: "Testing & Integrations",
+    skills: [
+      { name: "REST, Retrofit & APIs", icon: "🔗" },
+      { name: "Unit Testing (Mockito, Turbine)", icon: "🧪" },
+      { name: "UI Testing (Espresso)", icon: "📱" },
+      { name: "Google Play Services & SDKs", icon: "🧩" }
     ]
   },
   {
@@ -58,7 +76,7 @@ export const PROJECTS: Project[] = [
     tech: ["Python", "Kotlin", "Cloud APIs", "Machine Learning", "REST"],
     challenges: "Delivering actionable insights from streaming vehicle data while maintaining reliability across mobile and backend systems.",
     solutions: "Implemented data-driven monitoring, optimized API reliability, and launched predictive maintenance features with ML support.",
-    image: "https://images.unsplash.com/photo-1480472169628-018b2f00d3cd?q=80&w=2072&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop",
     github: "#",
     link: "#"
   }
