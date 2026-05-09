@@ -24,7 +24,7 @@ const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => v
       >
         <button 
           onClick={onClose}
-          className="absolute top-6 right-6 p-2.5 rounded-full bg-slate-800/80 hover:bg-slate-700 text-white transition-colors z-10 border border-white/5"
+          className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2.5 rounded-full bg-slate-800/80 hover:bg-slate-700 text-white transition-colors z-10 border border-white/5"
         >
           <X size={20} />
         </button>
@@ -88,6 +88,62 @@ const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => v
   );
 };
 
+const PrivacyPolicyModal = ({ onClose }: { onClose: () => void }) => {
+  return (
+    <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-6 bg-slate-950/90 backdrop-blur-md" onClick={onClose}>
+      <div 
+        className="relative w-full max-w-2xl max-h-[80vh] overflow-y-auto bg-slate-900 border border-white/10 rounded-[2.5rem] shadow-2xl animate-in zoom-in duration-300 p-8 md:p-12"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button 
+          onClick={onClose}
+          className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2.5 rounded-full bg-slate-800/80 hover:bg-slate-700 text-white transition-colors z-10 border border-white/5"
+        >
+          <X size={20} />
+        </button>
+
+        <div className="flex items-center space-x-2 mb-6">
+          <Sparkles size={16} className="text-brand-500" />
+          <span className="text-brand-500 text-xs font-bold uppercase tracking-widest">Legal</span>
+        </div>
+        
+        <h3 className="text-4xl font-black text-white mb-8 leading-tight tracking-tighter">Privacy Policy.</h3>
+        
+        <div className="space-y-8 text-slate-400 leading-relaxed">
+          <div>
+            <h4 className="text-white font-bold text-lg mb-3">Introduction</h4>
+            <p>This Privacy Policy describes how your personal information is collected and used when you visit this portfolio. I am committed to protecting your privacy and ensuring a secure experience.</p>
+          </div>
+
+          <div>
+            <h4 className="text-white font-bold text-lg mb-3">Information Collection</h4>
+            <p>I only collect personal information that you voluntarily provide through the contact form, such as your name, email address, and the content of your message. This site does not use tracking cookies or third-party analytics that identify you personally.</p>
+          </div>
+
+          <div>
+            <h4 className="text-white font-bold text-lg mb-3">Use of Information</h4>
+            <p>The information collected is used exclusively to respond to your inquiries and facilitate professional communication. I do not sell, rent, or share your personal information with third parties for marketing purposes.</p>
+          </div>
+
+          <div>
+            <h4 className="text-white font-bold text-lg mb-3">Data Security</h4>
+            <p>I implement reasonable security measures to protect your information from unauthorized access or disclosure. However, please be aware that no method of transmission over the internet is 100% secure.</p>
+          </div>
+
+          <div>
+            <h4 className="text-white font-bold text-lg mb-3">Contact</h4>
+            <p>If you have any questions about this Privacy Policy, please reach out via the email provided in the contact section.</p>
+          </div>
+        </div>
+        
+        <div className="mt-12 pt-8 border-t border-white/5 text-[10px] font-black uppercase tracking-widest text-slate-600">
+          Last Updated: May 2026
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -97,6 +153,15 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => { document.body.style.overflow = 'unset'; };
+  }, [isOpen]);
 
   const navLinks = [
     { name: 'About', href: '#about' },
@@ -128,26 +193,26 @@ const Navbar = () => {
           </a>
         </div>
 
-        <div className="lg:hidden">
-          <button onClick={() => setIsOpen(!isOpen)} className="text-white p-2 hover:bg-white/5 rounded-xl transition-colors">
+        <div className="lg:hidden z-50">
+          <button onClick={() => setIsOpen(!isOpen)} className="text-white p-3 -m-3 active:bg-white/10 rounded-xl transition-colors">
             {isOpen ? <X size={32} /> : <Menu size={32} />}
           </button>
         </div>
       </div>
 
       {isOpen && (
-        <div className="lg:hidden fixed inset-0 top-[88px] bg-slate-950 z-40 p-8 space-y-8 flex flex-col items-center justify-center animate-in fade-in slide-in-from-top-10 duration-500">
+        <div className="lg:hidden fixed inset-0 bg-slate-950 z-40 p-6 pt-32 space-y-8 flex flex-col items-center justify-start overflow-y-auto animate-in fade-in slide-in-from-top-4 duration-300">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              className="block text-5xl font-black text-slate-100 hover:text-brand-400 transition-colors tracking-tighter"
+              className="block text-4xl font-black text-slate-100 active:text-brand-400 transition-colors tracking-tighter"
               onClick={() => setIsOpen(false)}
             >
               {link.name}.
             </a>
           ))}
-          <a href="#contact" onClick={() => setIsOpen(false)} className="mt-8 px-12 py-5 rounded-3xl bg-brand-600 text-white font-black text-xl uppercase tracking-widest shadow-2xl">
+          <a href="#contact" onClick={() => setIsOpen(false)} className="mt-8 px-10 py-4 rounded-3xl bg-brand-600 text-white font-black text-lg uppercase tracking-widest shadow-2xl active:scale-95 transition-all">
             Start a project
           </a>
         </div>
@@ -173,29 +238,29 @@ const Hero = () => (
         <span>Based in New Delhi, India</span>
       </div>
       
-      <h1 className="text-7xl md:text-9xl font-black text-white mb-10 leading-[0.85] tracking-tighter animate-in fade-in slide-in-from-bottom duration-1000">
+      <h1 className="text-5xl sm:text-7xl md:text-9xl font-black text-white mb-8 sm:mb-10 leading-[0.9] sm:leading-[0.85] tracking-tighter animate-in fade-in slide-in-from-bottom duration-1000">
         TECHNICAL<br />
         <span className="bg-gradient-to-r from-brand-400 via-brand-500 to-indigo-500 bg-clip-text text-transparent">PRODUCT LEAD.</span>
       </h1>
       
-      <p className="max-w-3xl text-xl md:text-3xl text-slate-400 mb-14 leading-tight font-medium animate-in fade-in slide-in-from-bottom duration-1000 delay-200">
+      <p className="max-w-3xl text-lg sm:text-xl md:text-3xl text-slate-400 mb-10 sm:mb-14 leading-tight font-medium animate-in fade-in slide-in-from-bottom duration-1000 delay-200">
         12+ years of experience delivering AI/ML telematics, connected vehicle systems, and mobile-first Android solutions across firmware, cloud, and user experience.
       </p>
       
-      <div className="flex flex-col sm:flex-row space-y-6 sm:space-y-0 sm:space-x-8 animate-in fade-in slide-in-from-bottom duration-1000 delay-300">
-        <a href="#projects" className="group px-12 py-6 rounded-2xl bg-brand-600 hover:bg-brand-500 text-white font-black uppercase tracking-widest transition-all flex items-center justify-center text-lg shadow-2xl shadow-brand-600/40 hover:-translate-y-1">
-          Explore Projects <ArrowRight className="ml-3 group-hover:translate-x-2 transition-transform" size={24} />
+      <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 animate-in fade-in slide-in-from-bottom duration-1000 delay-300">
+        <a href="#projects" className="group px-8 sm:px-12 py-5 sm:py-6 rounded-2xl bg-brand-600 hover:bg-brand-500 text-white font-black uppercase tracking-widest transition-all flex items-center justify-center text-sm sm:text-lg shadow-2xl shadow-brand-600/40 active:scale-95">
+          Explore Projects <ArrowRight className="ml-3 group-hover:translate-x-2 transition-transform" size={20} />
         </a>
-        <a href="#contact" className="px-12 py-6 rounded-2xl bg-white/5 hover:bg-white/10 text-white font-black uppercase tracking-widest transition-all border border-white/10 text-lg hover:-translate-y-1">
+        <a href="#contact" className="px-8 sm:px-12 py-5 sm:py-6 rounded-2xl bg-white/5 hover:bg-white/10 text-white font-black uppercase tracking-widest transition-all border border-white/10 text-sm sm:text-lg text-center active:scale-95">
           Work with me
         </a>
       </div>
 
-      <div className="mt-32 pt-16 border-t border-white/5 grid grid-cols-2 md:grid-cols-4 gap-12 opacity-40">
-        <div className="flex items-center space-x-3 text-slate-400 font-black uppercase tracking-widest text-[10px]"><Layers size={18} className="text-brand-500" /> <span>12+ Years Experience</span></div>
-        <div className="flex items-center space-x-3 text-slate-400 font-black uppercase tracking-widest text-[10px]"><Cpu size={18} className="text-brand-500" /> <span>AI & Telematics Delivery</span></div>
-        <div className="flex items-center space-x-3 text-slate-400 font-black uppercase tracking-widest text-[10px]"><Layout size={18} className="text-brand-500" /> <span>Connected Vehicle Systems</span></div>
-        <div className="flex items-center space-x-3 text-slate-400 font-black uppercase tracking-widest text-[10px]"><Smartphone size={18} className="text-brand-500" /> <span>Mobile Product Leadership</span></div>
+      <div className="mt-20 sm:mt-32 pt-10 sm:pt-16 border-t border-white/5 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 opacity-50">
+        <div className="flex items-center space-x-3 text-slate-400 font-black uppercase tracking-widest text-[10px]"><Layers size={18} className="text-brand-500 shrink-0" /> <span>12+ Years Experience</span></div>
+        <div className="flex items-center space-x-3 text-slate-400 font-black uppercase tracking-widest text-[10px]"><Cpu size={18} className="text-brand-500 shrink-0" /> <span>AI & Telematics Delivery</span></div>
+        <div className="flex items-center space-x-3 text-slate-400 font-black uppercase tracking-widest text-[10px]"><Layout size={18} className="text-brand-500 shrink-0" /> <span>Connected Vehicle Systems</span></div>
+        <div className="flex items-center space-x-3 text-slate-400 font-black uppercase tracking-widest text-[10px]"><Smartphone size={18} className="text-brand-500 shrink-0" /> <span>Mobile Product Leadership</span></div>
       </div>
     </div>
   </section>
@@ -502,24 +567,24 @@ const Contact = () => {
               <h2 className="text-6xl md:text-8xl font-black text-white mb-10 leading-[0.85] tracking-tighter">Let's craft the <br />future.</h2>
               <p className="text-2xl text-slate-400 mb-16 leading-tight font-medium">I'm currently based in {SOCIAL_LINKS.location} and open to senior architectural roles.</p>
               
-              <div className="space-y-8">
-                <a href={`mailto:${SOCIAL_LINKS.email}`} className="flex items-center space-x-6 group">
+              <div className="space-y-8 relative z-20">
+                <a href={`mailto:${SOCIAL_LINKS.email}`} className="flex items-center space-x-6 group cursor-pointer relative z-30">
                   <div className="w-16 h-16 rounded-[1.5rem] bg-white/5 border border-white/10 flex items-center justify-center text-brand-400 group-hover:bg-brand-600 group-hover:text-white transition-all shadow-xl">
                     <Mail size={28} />
                   </div>
-                  <span className="text-2xl font-black text-white group-hover:text-brand-400 transition-colors tracking-tighter">{SOCIAL_LINKS.email}</span>
+                  <span className="text-xl sm:text-2xl font-black text-white group-hover:text-brand-400 transition-colors tracking-tighter break-all">{SOCIAL_LINKS.email}</span>
                 </a>
-                <a href={`tel:${SOCIAL_LINKS.phone}`} className="flex items-center space-x-6 group">
+                <a href={`tel:${SOCIAL_LINKS.phone}`} className="flex items-center space-x-6 group cursor-pointer relative z-30">
                   <div className="w-16 h-16 rounded-[1.5rem] bg-white/5 border border-white/10 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-xl">
                     <Phone size={28} />
                   </div>
-                  <span className="text-2xl font-black text-white group-hover:text-emerald-400 transition-colors tracking-tighter">{SOCIAL_LINKS.phone}</span>
+                  <span className="text-xl sm:text-2xl font-black text-white group-hover:text-emerald-400 transition-colors tracking-tighter">{SOCIAL_LINKS.phone}</span>
                 </a>
-                <a href={SOCIAL_LINKS.linkedin} className="flex items-center space-x-6 group">
+                <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-6 group cursor-pointer relative z-30">
                   <div className="w-16 h-16 rounded-[1.5rem] bg-white/5 border border-white/10 flex items-center justify-center text-blue-500 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-xl">
                     <Linkedin size={28} />
                   </div>
-                    <span className="text-2xl font-black text-white group-hover:text-blue-400 transition-colors tracking-tighter">Dilip Kumar</span>
+                    <span className="text-xl sm:text-2xl font-black text-white group-hover:text-blue-400 transition-colors tracking-tighter">Dilip Kumar</span>
                 </a>
               </div>
             </div>
@@ -571,7 +636,7 @@ const Contact = () => {
   );
 };
 
-const Footer = () => (
+const Footer = ({ onPrivacyClick }: { onPrivacyClick: () => void }) => (
   <footer className="bg-slate-950 pt-32 pb-16 border-t border-white/5">
     <div className="max-w-7xl mx-auto px-6 sm:px-10">
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-24 space-y-16 lg:space-y-0">
@@ -579,10 +644,10 @@ const Footer = () => (
           <a href="#" className="text-5xl font-black text-white mb-6 block tracking-tighter">DILIP.</a>
           <p className="text-slate-500 font-medium text-xl leading-snug">Architecting high-performance digital experiences with over a decade of product and mobile engineering leadership.</p>
         </div>
-        <div className="flex space-x-8">
-          <a href={SOCIAL_LINKS.github} className="text-slate-500 hover:text-white transition-all p-5 rounded-[1.5rem] bg-slate-900 border border-white/5 hover:border-brand-500/50 shadow-xl"><Github size={32} /></a>
-          <a href={SOCIAL_LINKS.linkedin} className="text-slate-500 hover:text-white transition-all p-5 rounded-[1.5rem] bg-slate-900 border border-white/5 hover:border-brand-500/50 shadow-xl"><Linkedin size={32} /></a>
-          <a href={`mailto:${SOCIAL_LINKS.email}`} className="text-slate-500 hover:text-white transition-all p-5 rounded-[1.5rem] bg-slate-900 border border-white/5 hover:border-brand-500/50 shadow-xl"><Mail size={32} /></a>
+        <div className="flex space-x-8 relative z-20">
+          <a href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-white transition-all p-5 rounded-[1.5rem] bg-slate-900 border border-white/5 hover:border-brand-500/50 shadow-xl cursor-pointer"><Github size={32} /></a>
+          <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-white transition-all p-5 rounded-[1.5rem] bg-slate-900 border border-white/5 hover:border-brand-500/50 shadow-xl cursor-pointer"><Linkedin size={32} /></a>
+          <a href={`mailto:${SOCIAL_LINKS.email}`} className="text-slate-500 hover:text-white transition-all p-5 rounded-[1.5rem] bg-slate-900 border border-white/5 hover:border-brand-500/50 shadow-xl cursor-pointer"><Mail size={32} /></a>
         </div>
       </div>
       
@@ -604,10 +669,13 @@ const Footer = () => (
              <li>CI/CD & Testing</li>
            </ul>
          </div>
-         <div className="col-span-2">
+         <div className="col-span-2 relative z-20">
            <h4 className="text-white font-black mb-8 text-xs uppercase tracking-[0.3em]">Direct Contact</h4>
-           <p className="text-slate-500 mb-8 text-lg font-medium leading-relaxed max-w-sm">{SOCIAL_LINKS.phone}<br/>{SOCIAL_LINKS.email}</p>
-           <a href={SOCIAL_LINKS.linkedin} className="inline-flex items-center space-x-3 text-brand-500 font-black uppercase tracking-widest text-xs group">
+           <div className="text-slate-500 mb-8 text-lg font-medium leading-relaxed max-w-sm">
+             <a href={`tel:${SOCIAL_LINKS.phone}`} className="block hover:text-brand-400 transition-colors cursor-pointer">{SOCIAL_LINKS.phone}</a>
+             <a href={`mailto:${SOCIAL_LINKS.email}`} className="block hover:text-brand-400 transition-colors cursor-pointer">{SOCIAL_LINKS.email}</a>
+           </div>
+           <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center space-x-3 text-brand-500 font-black uppercase tracking-widest text-xs group cursor-pointer">
              <span>View LinkedIn Profile</span> <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
            </a>
          </div>
@@ -616,7 +684,7 @@ const Footer = () => (
       <div className="pt-20 flex flex-col md:flex-row justify-between items-center text-slate-700 text-[10px] font-black uppercase tracking-[0.4em]">
         <p>&copy; {new Date().getFullYear()} DILIP KUMAR PORTFOLIO</p>
         <p className="mt-6 md:mt-0 flex items-center">
-          ENGINEERED WITH PRECISION <span className="text-brand-500 mx-3">•</span> NEW DELHI, INDIA
+          ENGINEERED WITH PRECISION <span className="text-brand-500 mx-3">•</span> <button onClick={onPrivacyClick} className="hover:text-brand-400 transition-colors mr-3">PRIVACY POLICY</button> <span className="text-brand-500 mr-3">•</span> NEW DELHI, INDIA
         </p>
       </div>
     </div>
@@ -624,6 +692,17 @@ const Footer = () => (
 );
 
 export default function App() {
+  const [showPrivacy, setShowPrivacy] = useState(false);
+
+  useEffect(() => {
+    if (showPrivacy) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => { document.body.style.overflow = 'unset'; };
+  }, [showPrivacy]);
+
   return (
     <div className="min-h-screen bg-slate-950 font-sans selection:bg-brand-500/30 text-slate-200 antialiased">
       <Navbar />
@@ -636,7 +715,8 @@ export default function App() {
         <AIConsultant />
         <Contact />
       </main>
-      <Footer />
+      <Footer onPrivacyClick={() => setShowPrivacy(true)} />
+      {showPrivacy && <PrivacyPolicyModal onClose={() => setShowPrivacy(false)} />}
     </div>
   );
 }
